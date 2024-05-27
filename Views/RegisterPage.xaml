@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
-             x:Class="TravelBuddyApp.Views.RegisterPage">
+             x:Class="TravelBuddyApp.Views.RegisterPage"
+             BackgroundColor="Beige">
 
     <ContentPage.BindingContext>
         <vm:RegisterViewModel />

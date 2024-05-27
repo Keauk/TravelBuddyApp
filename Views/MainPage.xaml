@@ -1,12 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelBuddyApp.Views.MainPage">
+             x:Class="TravelBuddyApp.Views.MainPage"
+             BackgroundColor="Beige">
 
-    <ScrollView>
-        <VerticalStackLayout>
-            <Button Text="Register" Clicked="OnRegisterButtonClicked" />
-        </VerticalStackLayout>
-    </ScrollView>
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="100, 60, Auto, Auto, Auto, 10, 70, 4, 50"
+            ColumnDefinitions=".125*, .75*, .125*"
+          RowSpacing="10">
+
+        <Image Grid.ColumnSpan="3"
+               Source="travelbuddy.png"
+               BackgroundColor="DarkSeaGreen"></Image>
+
+        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Username" Text="{Binding Username}" />
+
+        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+
+        <Button Grid.Row="6" Grid.Column="1" Text="Login" Clicked="OnLoginButtonClicked" />
+
+        <Button Grid.Row="8" Grid.Column="1" Text="Register" Clicked="OnRegisterButtonClicked" />
+
+    </Grid>
 
 </ContentPage>

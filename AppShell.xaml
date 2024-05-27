@@ -14,5 +14,5 @@
     <FlyoutItem Title="Register" Icon="icon_register.png">
         <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate views:RegisterPage}" />
     </FlyoutItem>
-    
+
 </Shell>

@@ -1,6 +1,6 @@
 ﻿namespace TravelBuddyApp.Models
 {
-    internal class TripLogInput
+    public class TripLogInput
     {
         public string Location { get; set; }
         public string Notes { get; set; }

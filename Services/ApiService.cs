@@ -9,8 +9,10 @@ namespace TravelBuddyApp.Services
 
         public ApiService()
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://yourapiurl.com/");
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7052/")
+            };
         }
 
         public async Task<bool> RegisterUserAsync(UserInput userInput)

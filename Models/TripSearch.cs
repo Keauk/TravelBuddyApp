@@ -1,6 +1,6 @@
 ﻿namespace TravelBuddyApp.Models
 {
-    internal class TripSearch
+    public class TripSearch
     {
         public string Title { get; set; }
     }

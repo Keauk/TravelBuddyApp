@@ -1,6 +1,6 @@
 ﻿namespace TravelBuddyApp.Models
 {
-    internal class UserInput
+    public class UserInput
     {
         public string Username { get; set; }
         public string Email { get; set; }

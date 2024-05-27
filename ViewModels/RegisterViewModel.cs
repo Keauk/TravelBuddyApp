@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using TravelBuddyApp.Models;
 using TravelBuddyApp.Services;
+using Microsoft.Maui.Controls;
+
 namespace TravelBuddyApp.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
@@ -50,6 +52,9 @@ namespace TravelBuddyApp.ViewModels
             if (success)
             {
                 await Application.Current.MainPage.DisplayAlert("Success", "User registered successfully!", "OK");
+
+                // Navigate back to main page if user is successfully created. 
+                await Shell.Current.GoToAsync("//MainPage");
             }
             else
             {

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.DependencyInjection;
 using TravelBuddyApp.Services;
 using TravelBuddyApp.ViewModels;
+using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp
 {

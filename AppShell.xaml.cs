@@ -1,5 +1,4 @@
-﻿using Android.Content.Res;
-using TravelBuddyApp.Views;
+﻿using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp
 {

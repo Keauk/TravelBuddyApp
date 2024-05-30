@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using TravelBuddyApp.Platforms.Android;
 using TravelBuddyApp.Services;
 using TravelBuddyApp.ViewModels;
 using TravelBuddyApp.Views;
@@ -17,6 +18,10 @@ namespace TravelBuddyApp
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                })
+                .ConfigureMauiHandlers(handlers =>
+                {
+                    handlers.AddHandler(typeof(Entry), typeof(EntryHandler));
                 });
 
             // Register services

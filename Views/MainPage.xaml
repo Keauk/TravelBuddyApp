@@ -3,29 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TravelBuddyApp.Views.MainPage"
              xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
-             BackgroundColor="Beige">
+             BackgroundColor="Beige"
+             Shell.NavBarIsVisible="False">
 
 
     <ContentPage.BindingContext>
         <vm:LoginViewModel />
     </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="100, 60, Auto, Auto, Auto, 10, 70, 4, 50"
-            ColumnDefinitions=".125*, .75*, .125*"
-          RowSpacing="10">
+    <Grid RowDefinitions="100, 0, 70, Auto, Auto, 0, 80, 60, 80"
+          ColumnDefinitions=".125*, .75*, .125*"
+          RowSpacing="10"
+          BackgroundColor="White">
 
-        <Image Grid.ColumnSpan="3"
-               Source="travelbuddy.png"
-               BackgroundColor="DarkSeaGreen"></Image>
+        <!-- Image Frame -->
+        <Frame Grid.ColumnSpan="3"
+               Padding="0"
+               CornerRadius="0"
+               HasShadow="True"
+               BackgroundColor="DarkSeaGreen"
+               BorderColor="Black"
+               Margin="0">
+            <Image Source="travelbuddy.png"
+                   Aspect="AspectFit"/>
+        </Frame>
 
-        <Entry Grid.Row="3" Grid.Column="1" Placeholder="Username" Text="{Binding Username}" />
+        <!-- Username Entry BoxView (Shadow) -->
+        <BoxView Grid.Row="3"
+                 Grid.Column="1"
+                 HeightRequest="64"
+                 Margin="14, 4, -5, 0"
+                 Color="Gray"/>
 
-        <Entry Grid.Row="4" Grid.Column="1" Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+        <!-- Username Entry Frame -->
+        <Frame Grid.Row="3"
+               Grid.Column="1"
+               HeightRequest="64"
+               Padding="4"
+               CornerRadius="0"
+               BorderColor="Black"
+               BackgroundColor="White"
+               HasShadow="False"
+               Margin="10, 0, 0, 10">
+            <Entry Placeholder="Username"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   IsTextPredictionEnabled="False"
+                   Text="{Binding Username}"
+                   TextColor="Black"
+                   BackgroundColor="Transparent"
+                   PlaceholderColor="Gray"/>
+        </Frame>
 
-        <Button Grid.Row="6" Grid.Column="1" Text="Login" Clicked="OnLoginButtonClicked" />
+        <!-- Password Entry BoxView (Shadow) -->
+        <BoxView Grid.Row="4"
+                 Grid.Column="1"
+                 HeightRequest="64"
+                 Margin="14, 4, -5, 0"
+                 Color="Gray"/>
 
-        <Button Grid.Row="8" Grid.Column="1" Text="Register" Clicked="OnRegisterButtonClicked" />
+        <!-- Password Entry Frame -->
+        <Frame Grid.Row="4"
+               Grid.Column="1"
+               HeightRequest="64"
+               Padding="4"
+               CornerRadius="0"
+               BorderColor="Black"
+               BackgroundColor="White"
+               HasShadow="False"
+               Margin="10, 0, 0, 10">
+            <Entry Placeholder="Password"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   IsTextPredictionEnabled="False"
+                   Text="{Binding Password}"
+                   IsPassword="True"
+                   TextColor="Black"
+                   BackgroundColor="Transparent"
+                   PlaceholderColor="Gray"/>
+        </Frame>
+
+        <!-- Login Button -->
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Text="Login"
+                FontSize="24"
+                TextColor="White"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                HeightRequest="60"
+                Margin="10, 0, 0, 10"
+                Clicked="OnLoginButtonClicked"
+                HorizontalOptions="FillAndExpand"/>
+
+
+        <Label Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" Margin="0, -30, 0, 0">New user?</Label>
+
+        <!-- Register Button -->
+        <Button Grid.Row="8"
+                Grid.Column="1"
+                Text="Register"
+                FontSize="24"
+                TextColor="White"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                HeightRequest="60"
+                Margin="10, 0, 0, 10"
+                Clicked="OnRegisterButtonClicked"
+                HorizontalOptions="FillAndExpand"/>
 
     </Grid>
-
 </ContentPage>

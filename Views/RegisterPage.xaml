@@ -3,17 +3,124 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
              x:Class="TravelBuddyApp.Views.RegisterPage"
-             BackgroundColor="Beige">
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.BindingContext>
         <vm:RegisterViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout Padding="10">
-        <Entry Placeholder="Username" Text="{Binding Username}" />
-        <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
-        <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-        <Button Text="Register" Command="{Binding RegisterCommand}" />
-    </StackLayout>
+    <Grid RowDefinitions="100, 0, 70, Auto, Auto, Auto, 80, 60, 80"
+          ColumnDefinitions=".125*, .75*, .125*"
+          RowSpacing="10"
+          BackgroundColor="White">
 
+        <!-- Image Frame -->
+        <Frame Grid.ColumnSpan="3"
+               Padding="0"
+               CornerRadius="0"
+               HasShadow="True"
+               BackgroundColor="DarkSeaGreen"
+               BorderColor="Black"
+               Margin="0">
+            <Image Source="travelbuddy.png"
+                   Aspect="AspectFit"/>
+        </Frame>
+
+        <!-- Username Entry BoxView (Shadow) -->
+        <BoxView Grid.Row="3"
+                 Grid.Column="1"
+                 HeightRequest="64"
+                 Margin="14, 4, -5, 0"
+                 Color="Gray"/>
+
+        <!-- Username Entry Frame -->
+        <Frame Grid.Row="3"
+               Grid.Column="1"
+               HeightRequest="64"
+               Padding="4"
+               CornerRadius="0"
+               BorderColor="Black"
+               BackgroundColor="White"
+               HasShadow="False"
+               Margin="10, 0, 0, 10">
+            <Entry Placeholder="Username"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   IsTextPredictionEnabled="False"
+                   Text="{Binding Username}"
+                   TextColor="Black"
+                   BackgroundColor="Transparent"
+                   PlaceholderColor="Gray"/>
+        </Frame>
+
+        <!-- Password Entry BoxView (Shadow) -->
+        <BoxView Grid.Row="4"
+                 Grid.Column="1"
+                 HeightRequest="64"
+                 Margin="14, 4, -5, 0"
+                 Color="Gray"/>
+
+        <!-- Password Entry Frame -->
+        <Frame Grid.Row="4"
+               Grid.Column="1"
+               HeightRequest="64"
+               Padding="4"
+               CornerRadius="0"
+               BorderColor="Black"
+               BackgroundColor="White"
+               HasShadow="False"
+               Margin="10, 0, 0, 10">
+            <Entry Placeholder="Password"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   IsTextPredictionEnabled="False"
+                   Text="{Binding Password}"
+                   IsPassword="True"
+                   TextColor="Black"
+                   BackgroundColor="Transparent"
+                   PlaceholderColor="Gray"/>
+        </Frame>
+
+        <!-- Password Entry BoxView (Shadow) -->
+        <BoxView Grid.Row="5"
+                 Grid.Column="1"
+                 HeightRequest="64"
+                 Margin="14, 4, -5, 0"
+                 Color="Gray"/>
+
+        <!-- Email Entry Frame -->
+        <Frame Grid.Row="5"
+               Grid.Column="1"
+               HeightRequest="64"
+               Padding="4"
+               CornerRadius="0"
+               BorderColor="Black"
+               BackgroundColor="White"
+               HasShadow="False"
+               Margin="10, 0, 0, 10">
+            <Entry Placeholder="Email Address"
+                   FontSize="20"
+                   VerticalOptions="Center"
+                   IsTextPredictionEnabled="False"
+                   Text="{Binding Email}"
+                   TextColor="Black"
+                   BackgroundColor="Transparent"
+                   PlaceholderColor="Gray"/>
+        </Frame>
+
+        <!-- Register Button -->
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Text="Register"
+                FontSize="24"
+                TextColor="White"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                HeightRequest="60"
+                Margin="10, 0, 0, 10"
+                Command="{Binding RegisterCommand}"
+                HorizontalOptions="FillAndExpand"/>
+
+    </Grid>
 </ContentPage>

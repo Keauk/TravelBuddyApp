@@ -51,7 +51,9 @@ namespace TravelBuddyApp.ViewModels
                     await SecureStorage.SetAsync("jwt_token", content.Token);
                     await Application.Current.MainPage.DisplayAlert("Success", "User logged in successfully!", "OK");
 
-                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage());
+                    // Get current user info and navigate to LandingPage
+                    var user = await _apiService.GetCurrentUserAsync();
+                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage(user));
                 }
             }
             else

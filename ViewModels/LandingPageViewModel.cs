@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using TravelBuddyApp.Models;
 
 namespace TravelBuddyApp.ViewModels
 {
@@ -16,16 +17,16 @@ namespace TravelBuddyApp.ViewModels
             }
         }
 
-        public LandingPageViewModel()
+        public LandingPageViewModel(UserResponse user)
         {
-            LoadData();
+            LoadData(user);
         }
 
-        private async void LoadData()
+        private async void LoadData(UserResponse user)
         {
             // Simulate loading data from a service or database
             await Task.Delay(2000);
-            WelcomeMessage = "Welcome to the Maui Trip Logging App!";
+            WelcomeMessage = $"Welcome {user.Username} to the Maui Trip Logging App!";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

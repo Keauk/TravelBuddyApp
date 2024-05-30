@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using TravelBuddyApp.Models;
 
 namespace TravelBuddyApp.Services
@@ -33,6 +34,23 @@ namespace TravelBuddyApp.Services
             var response = await _httpClient.PostAsJsonAsync("api/users/login", userLogin);
 
             return response;
+        }
+
+        public async Task<UserResponse> GetCurrentUserAsync()
+        {
+            await AddJwtTokenAsync();
+            var response = await _httpClient.GetFromJsonAsync<UserResponse>("api/users/me");
+
+            return response;
+        }
+
+        private async Task AddJwtTokenAsync()
+        {
+            var token = await SecureStorage.GetAsync("jwt_token");
+            if (!string.IsNullOrEmpty(token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
         }
     }
 }

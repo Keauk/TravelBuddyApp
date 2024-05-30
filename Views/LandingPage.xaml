@@ -6,10 +6,6 @@
              BackgroundColor="Beige"
              Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
-        <vm:LandingPageViewModel />
-    </ContentPage.BindingContext>
-
     <StackLayout>
         <Label Text="{Binding WelcomeMessage}"
                VerticalOptions="CenterAndExpand"

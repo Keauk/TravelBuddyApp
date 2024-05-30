@@ -29,7 +29,7 @@ namespace TravelBuddyApp.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-        public ICommand LoginCommand { get; }
+        public IAsyncRelayCommand LoginCommand { get; }
 
         private async Task OnLogin()
         {

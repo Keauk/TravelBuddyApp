@@ -9,15 +9,22 @@ namespace TravelBuddyApp.Services
 
         public ApiService()
         {
-            _httpClient = new HttpClient
+           
+            HttpClientHandler handler = new HttpClientHandler
             {
-                BaseAddress = new Uri("https://localhost:7052/")
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+
+            _httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri("https://10.0.2.2:7052/")
             };
         }
 
         public async Task<bool> RegisterUserAsync(UserInput userInput)
         {
             var response = await _httpClient.PostAsJsonAsync("api/users", userInput);
+
             return response.IsSuccessStatusCode;
         }
 

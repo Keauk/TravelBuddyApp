@@ -24,9 +24,8 @@ namespace TravelBuddyApp.ViewModels
 
         private async void LoadData(UserResponse user)
         {
-            // Simulate loading data from a service or database
-            await Task.Delay(2000);
-            WelcomeMessage = $"Welcome {user.Username} to the Maui Trip Logging App!";
+            await Task.Delay(1000);
+            WelcomeMessage = $"Welcome to TravelBuddy {user.Username}!";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

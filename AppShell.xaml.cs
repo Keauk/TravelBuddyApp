@@ -9,6 +9,7 @@ namespace TravelBuddyApp
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(LandingPage), typeof(LandingPage));
         }
     }
 }

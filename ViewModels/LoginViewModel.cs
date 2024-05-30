@@ -2,6 +2,9 @@
 using System.Windows.Input;
 using TravelBuddyApp.Models;
 using TravelBuddyApp.Services;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
+using System.Net.Http.Json;
 
 namespace TravelBuddyApp.ViewModels
 {
@@ -39,10 +42,17 @@ namespace TravelBuddyApp.ViewModels
                 Password = Password
             };
 
-            var success = await _apiService.LoginUserAsync(userLogin);
-            if (success)
+            var response = await _apiService.LoginUserAsync(userLogin);
+            if (response.IsSuccessStatusCode)
             {
-                await Application.Current.MainPage.DisplayAlert("Success", "User logged in successfully!", "OK");
+                var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                if (content != null)
+                {
+                    await SecureStorage.SetAsync("jwt_token", content.Token);
+                    await Application.Current.MainPage.DisplayAlert("Success", "User logged in successfully!", "OK");
+
+                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage());
+                }
             }
             else
             {

@@ -21,18 +21,18 @@ namespace TravelBuddyApp.Services
             };
         }
 
-        public async Task<bool> RegisterUserAsync(UserInput userInput)
+        public async Task<HttpResponseMessage> RegisterUserAsync(UserInput userInput)
         {
             var response = await _httpClient.PostAsJsonAsync("api/users", userInput);
 
-            return response.IsSuccessStatusCode;
+            return response;
         }
 
-        public async Task<bool> LoginUserAsync(UserLogin userLogin)
+        public async Task<HttpResponseMessage> LoginUserAsync(UserLogin userLogin)
         {
             var response = await _httpClient.PostAsJsonAsync("api/users/login", userLogin);
 
-            return response.IsSuccessStatusCode;
+            return response;
         }
     }
 }

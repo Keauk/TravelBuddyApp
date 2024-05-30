@@ -48,8 +48,8 @@ namespace TravelBuddyApp.ViewModels
                 Password = Password
             };
 
-            var success = await _apiService.RegisterUserAsync(userInput);
-            if (success)
+            HttpResponseMessage response = await _apiService.RegisterUserAsync(userInput);
+            if (response.IsSuccessStatusCode)
             {
                 await Application.Current.MainPage.DisplayAlert("Success", "User registered successfully!", "OK");
 

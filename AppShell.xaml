@@ -15,4 +15,8 @@
         <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate views:RegisterPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="LandingPage">
+        <ShellContent Route="LandingPage" ContentTemplate="{DataTemplate views:LandingPage}" />
+    </FlyoutItem>
+
 </Shell>

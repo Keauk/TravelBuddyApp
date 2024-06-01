@@ -8,7 +8,7 @@ namespace TravelBuddyApp
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new MainPage());
         }
     }
 }

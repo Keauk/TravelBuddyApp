@@ -28,6 +28,7 @@ namespace TravelBuddyApp
             builder.ConfigureMauiHandlers(handlers =>
             {
                 handlers.AddHandler(typeof(Entry), typeof(EntryHandler));
+                handlers.AddHandler(typeof(Editor), typeof(EditorHandler));
             });
             #endif
 

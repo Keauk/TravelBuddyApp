@@ -4,11 +4,19 @@
              x:Class="TravelBuddyApp.Views.LandingPage"
              xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
              BackgroundColor="Beige"
-             Shell.NavBarIsVisible="False">
+             NavigationPage.HasNavigationBar="False">
 
-    <StackLayout>
-        <Label Text="{Binding WelcomeMessage}"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand" />
-    </StackLayout>
+    <Grid RowDefinitions="300, 60, 14, 25, 40,100" ColumnDefinitions=".125*, .75*, .125*" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Beige">
+        <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" CornerRadius="0" Padding="0" BackgroundColor="Beige" BorderColor="Beige">
+            <Grid RowDefinitions=".30*,.25*,.20*,.25*" Padding="8">
+
+                <Button Grid.Row="1" BackgroundColor="black" CornerRadius="0" Text="Make Trip" FontSize="24" Clicked="OnMakeTripButtonClicked"></Button>
+
+                <Button Grid.Row="3" BackgroundColor="black" CornerRadius="0" Text="My Trips" FontSize="24"></Button>
+            </Grid>
+        </Frame>
+        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Beige" BorderColor="Beige" CornerRadius="0" Padding="0">
+            <BoxView Background="Black"></BoxView>
+        </Frame>
+    </Grid>
 </ContentPage>

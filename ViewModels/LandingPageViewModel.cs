@@ -25,7 +25,7 @@ namespace TravelBuddyApp.ViewModels
         private async void LoadData(UserResponse user)
         {
             await Task.Delay(1000);
-            WelcomeMessage = $"Welcome to TravelBuddy {user.Username}!";
+            WelcomeMessage = $"Welcome to TravelBuddy, {user.Username}!";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

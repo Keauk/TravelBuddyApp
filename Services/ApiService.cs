@@ -22,6 +22,14 @@ namespace TravelBuddyApp.Services
             };
         }
 
+        public async Task<HttpResponseMessage> CreateTripAsync(TripInput tripInput)
+        {
+            await AddJwtTokenAsync();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("api/trips", tripInput);
+
+            return response;
+        }
+
         public async Task<HttpResponseMessage> RegisterUserAsync(UserInput userInput)
         {
             var response = await _httpClient.PostAsJsonAsync("api/users", userInput);

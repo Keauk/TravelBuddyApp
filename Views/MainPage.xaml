@@ -4,7 +4,7 @@
              x:Class="TravelBuddyApp.Views.MainPage"
              xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
              BackgroundColor="Beige"
-             Shell.NavBarIsVisible="False">
+             NavigationPage.HasNavigationBar="False">
 
 
     <ContentPage.BindingContext>

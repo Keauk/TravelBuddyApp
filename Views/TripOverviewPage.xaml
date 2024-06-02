@@ -6,21 +6,43 @@
              BackgroundColor="Beige"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid ColumnDefinitions=".1*, .8*, .1*" RowDefinitions="20, 50, 50, 100, 18, 100*" Padding="0">
-        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Trip.Title}" FontSize="30" TextColor="Black" />
-        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Trip.Description}" FontSize="18" TextColor="Gray" />
-        <CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="4" BackgroundColor="Black">
-            <CollectionView.EmptyView>
-                <Button Text="CREATE LOG" 
-                        Margin="20"
-                        VerticalOptions="Start" 
-                        HeightRequest="100" 
-                        Command="{Binding AddTripLogCommand}" 
-                        BackgroundColor="#D3D3D3"
-                        FontSize="20"
-                        TextColor="Black"
-                        CornerRadius="0" />
-            </CollectionView.EmptyView>
-        </CollectionView>
-    </Grid>
+	<ContentPage.BindingContext>
+		<vm:TripOverviewViewModel />
+	</ContentPage.BindingContext>
+
+	<Grid ColumnDefinitions=".1*, .8*, .1*" RowDefinitions="20, 50, 50, 50, 100, 8, 800, *" Padding="0">
+		<Label Grid.Column="1" Grid.Row="1" Text="{Binding Trip.Title}" FontSize="30" TextColor="Black" />
+		<Label Grid.Column="1" Grid.Row="2" Text="{Binding Trip.Description}" FontSize="18" TextColor="Gray" />
+		<Button Grid.Row="4" Grid.Column="1" Text="CREATE LOG"
+                Margin="20"
+                VerticalOptions="Start"
+                HeightRequest="50"
+                Command="{Binding AddTripLogCommand}"
+                BackgroundColor="#D3D3D3"
+                FontSize="20"
+                TextColor="Black"
+                CornerRadius="0" />
+		<BoxView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" BackgroundColor="Black"></BoxView>
+		<CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="2" ItemsSource="{Binding Logs}" BackgroundColor="Black">
+			<CollectionView.EmptyView>
+				<StackLayout BackgroundColor="Black">
+					<Label Text="No logs available. Create a new log to get started."
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand" 
+						   TextColor="Orange" />
+				</StackLayout>
+			</CollectionView.EmptyView>
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Border Stroke="Black" StrokeThickness="4">
+					<Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions=".30*,.30*,.40*" BackgroundColor="#333333">
+						<Label Grid.Row="0" Text="{Binding Location}" FontSize="18" TextColor="Black" />
+						<Label Grid.Row="1" Text="{Binding Notes}" FontSize="16" TextColor="Gray" />
+						<Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Source="{Binding PhotoPath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
+					</Grid>
+					</Border>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+	</Grid>
 </ContentPage>

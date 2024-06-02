@@ -73,6 +73,23 @@ namespace TravelBuddyApp.Services
             return response;
         }
 
+        public async Task<IEnumerable<TripLogResponse>> GetCurrentLogsForTripAsync(int tripId)
+        {
+            await AddJwtTokenAsync();
+
+            var url = $"api/trips/{tripId}/triplogs";
+            Console.WriteLine(url);
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new List<TripLogResponse>();
+            }
+
+            return await response.Content.ReadFromJsonAsync<IEnumerable<TripLogResponse>>();
+        }
+
         public async Task<UserResponse> GetCurrentUserAsync()
         {
             await AddJwtTokenAsync();

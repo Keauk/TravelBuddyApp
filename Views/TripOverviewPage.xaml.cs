@@ -10,5 +10,15 @@ namespace TravelBuddyApp.Views
             InitializeComponent();
             BindingContext = new TripOverviewViewModel(trip);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is TripOverviewViewModel viewModel)
+            {
+                viewModel.LoadLogs();
+            }
+        }
     }
 }

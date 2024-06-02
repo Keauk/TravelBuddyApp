@@ -7,22 +7,22 @@
              Title="Create Log"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid Padding="0" RowDefinitions="70,50,20,90,5,50,20,90,10,90,10,90" ColumnDefinitions="0.125*, *, 0.125*">
+    <Grid Padding="0" RowDefinitions="50,100,10,50,20,90,5,50,20,90,10,90,10,90" ColumnDefinitions="0.125*, *, 0.125*">
 
 
-        <Image Grid.Row="0" Grid.Column="1" Source="{Binding Log.PhotoPath}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill" />
+        <Image Grid.Row="1" Grid.Column="1" Source="{Binding Log.PhotoPath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
 
         <!-- Upload Image Button -->
-        <Button Grid.Row="1" Grid.Column="1" Text="Upload Image" Command="{Binding UploadImageCommand}" CornerRadius="0" Margin="0"/>
+        <Button Grid.Row="3" Grid.Column="1" Text="Upload Image" Command="{Binding UploadImageCommand}" CornerRadius="0" Margin="0"/>
 
 
         <!-- Location -->
-        <BoxView Grid.Row="3"
+        <BoxView Grid.Row="5"
 						 Grid.Column="1"
 						 HeightRequest="64"
 						 Margin="10, 0, -5, -10"
 						 Color="Gray"/>
-        <Frame Grid.Row="3"
+        <Frame Grid.Row="5"
 					   Grid.Column="1"
 					   HeightRequest="64"
 					   Padding="4"
@@ -43,15 +43,15 @@
         </Frame>
 
         <!-- Pick Location Button -->
-        <Button Grid.Row="5" Grid.Column="1" Text="Pick Location" Command="{Binding PickLocationCommand}" TextColor="White" CornerRadius="0" Padding="0" Margin="0"/>
+        <Button Grid.Row="7" Grid.Column="1" Text="Pick Location" Command="{Binding PickLocationCommand}" TextColor="White" CornerRadius="0" Padding="0" Margin="0"/>
 
         <!-- Notes Editor -->
-        <BoxView Grid.Row="7"
+        <BoxView Grid.Row="9"
 						 Grid.Column="1"
 						 HeightRequest="64"
 						 Margin="10, 0, -5, -10"
 						 Color="Gray"/>
-        <Frame Grid.Row="7"
+        <Frame Grid.Row="9"
 					   Grid.Column="1"
 					   HeightRequest="64"
 					   Padding="4"
@@ -72,9 +72,9 @@
         </Frame>
 
         <!-- Date Picker -->
-        <DatePicker Grid.Row="9" Grid.Column="1" Date="{Binding Log.Date}"/>
+        <DatePicker Grid.Row="11" Grid.Column="1" Date="{Binding Log.Date}"/>
 
         <!-- Save Log Button -->
-        <Button Grid.Row="11" Grid.Column="1" Text="Save Log" Command="{Binding SaveLogCommand}" CornerRadius="0" Margin="0,20,0,0"/>
+        <Button Grid.Row="13" Grid.Column="1" Text="Save Log" Command="{Binding SaveLogCommand}" CornerRadius="0" Margin="0,20,0,0"/>
     </Grid>
 </ContentPage>

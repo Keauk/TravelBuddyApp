@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelBuddyApp.Views.MyTripsPage"
+             xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
+             BackgroundColor="Black"
+             NavigationPage.HasNavigationBar="False">
+
+	<Grid ColumnDefinitions=".1*, .8*, .1*" RowDefinitions="20, 50, 50, 50, 100, 8, 800, *" Padding="0">
+		<Label Grid.Column="1" Grid.Row="1" Text="My Trips" FontSize="30" TextColor="Gray" />
+		<Button Grid.Row="4" Grid.Column="1" Text="CREATE TRIP"
+                Margin="20"
+                VerticalOptions="Start"
+                HeightRequest="50"
+                Command="{Binding AddTripCommand}"
+                FontSize="20"
+                TextColor="White"
+                CornerRadius="0" />
+		<BoxView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" BackgroundColor="Black"></BoxView>
+		<CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="2" ItemsSource="{Binding Trips}" BackgroundColor="Black"
+                        SelectionMode="Single" SelectionChanged="OnTripSelected">
+			<CollectionView.EmptyView>
+				<StackLayout BackgroundColor="Black">
+					<Label Text="No trips available. Create a new trip to get started."
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="Orange" />
+				</StackLayout>
+			</CollectionView.EmptyView>
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Border Stroke="Black" BackgroundColor="Black" StrokeThickness="4">
+						<Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions=".40*,.20*,.40*" BackgroundColor="#333333">
+							<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="18" TextColor="Gray"/>
+							<Label Grid.Row="1" Grid.Column="0" Text="{Binding Description}" FontSize="16" TextColor="LightGray" />
+						</Grid>
+					</Border>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+	</Grid>
+</ContentPage>

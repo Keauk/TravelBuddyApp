@@ -19,5 +19,10 @@ namespace TravelBuddyApp.Views
         {
             await Navigation.PushAsync(new MakeTripPage(_currentUser));
         }
+
+        private async void OnMyTripsButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MyTripsPage(_currentUser));
+        }
     }
 }

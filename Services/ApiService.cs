@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using Kotlin;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using TravelBuddyApp.Models;
 
@@ -80,7 +81,7 @@ namespace TravelBuddyApp.Services
             var url = $"api/trips/{tripId}/triplogs";
             Console.WriteLine(url);
 
-            var response = await _httpClient.GetAsync(url);
+            HttpResponseMessage response = await _httpClient.GetAsync(url);
 
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
@@ -88,6 +89,22 @@ namespace TravelBuddyApp.Services
             }
 
             return await response.Content.ReadFromJsonAsync<IEnumerable<TripLogResponse>>();
+        }
+
+        public async Task<IEnumerable<TripResponse>> GetMyTripsAsync()
+        {
+            await AddJwtTokenAsync();
+
+            var url = "api/trips/me";
+
+            HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new List<TripResponse>();
+            }
+
+            return await response.Content.ReadFromJsonAsync<IEnumerable<TripResponse>>();
         }
 
         public async Task<UserResponse> GetCurrentUserAsync()

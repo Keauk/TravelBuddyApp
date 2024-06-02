@@ -71,7 +71,7 @@
 						   HeightRequest="200"/>
 				</Frame>
 
-				<!-- Register Button -->
+				<!-- Create Trip Button -->
 				<Button Grid.Row="4"
 						Grid.Column="1"
 						Text="Create"

@@ -23,6 +23,7 @@ namespace TravelBuddyApp.ViewModels
 
         public ICommand SaveLogCommand { get; }
         public ICommand UploadImageCommand { get; }
+        public ICommand PickLocationCommand { get; }
 
         private readonly ApiService _apiService;
 
@@ -32,6 +33,7 @@ namespace TravelBuddyApp.ViewModels
             Log = new TripLogInput();
             SaveLogCommand = new Command(async () => await OnSaveLog());
             UploadImageCommand = new Command(async () => await OnUploadImage());
+            PickLocationCommand = new Command(async () => await OnPickLocation());
             _apiService = new ApiService();
         }
 
@@ -66,6 +68,27 @@ namespace TravelBuddyApp.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", $"Failed to pick and upload photo: {ex.Message}", "OK");
+            }
+        }
+
+        private async Task OnPickLocation()
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location != null)
+                {
+                    Log.Location = $"{location.Latitude}, {location.Longitude}";
+                    OnPropertyChanged(nameof(Log));
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Could not get the location.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to get location: {ex.Message}", "OK");
             }
         }
 

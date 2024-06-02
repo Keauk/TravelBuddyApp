@@ -6,4 +6,21 @@
              BackgroundColor="Beige"
              Title="Create Log">
 
+    <StackLayout Padding="20">
+        <Label Text="Location" FontSize="Medium" />
+        <Entry Text="{Binding Log.Location}" Placeholder="Enter location" />
+        <Button Text="Pick Location" Command="{Binding PickLocationCommand}" BackgroundColor="#007AFF" TextColor="White" CornerRadius="5" Margin="0,20,0,0"/>
+
+        <Label Text="Notes" FontSize="Medium" Margin="0,20,0,0" />
+        <Editor Text="{Binding Log.Notes}" Placeholder="Enter notes" HeightRequest="100" />
+
+        <Label Text="Photo Path" FontSize="Medium" Margin="0,20,0,0" />
+        <Entry Text="{Binding Log.PhotoPath}" Placeholder="Enter photo path" IsReadOnly="True" />
+        <Button Text="Upload Image" Command="{Binding UploadImageCommand}" CornerRadius="0" Margin="0,20,0,0"/>
+
+        <Label Text="Date" FontSize="Medium" Margin="0,20,0,0" />
+        <DatePicker Date="{Binding Log.Date}" />
+
+        <Button Text="Save Log" Command="{Binding SaveLogCommand}" CornerRadius="0" Margin="0,20,0,0"/>
+    </StackLayout>
 </ContentPage>

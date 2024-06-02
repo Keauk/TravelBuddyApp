@@ -18,9 +18,8 @@
                 VerticalOptions="Start"
                 HeightRequest="50"
                 Command="{Binding AddTripLogCommand}"
-                BackgroundColor="#D3D3D3"
                 FontSize="20"
-                TextColor="Black"
+                TextColor="White"
                 CornerRadius="0" />
 		<BoxView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" BackgroundColor="Black"></BoxView>
 		<CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="2" ItemsSource="{Binding Logs}" BackgroundColor="Black">
@@ -34,10 +33,10 @@
 			</CollectionView.EmptyView>
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
-					<Border Stroke="Black" StrokeThickness="4">
-					<Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions=".30*,.30*,.40*" BackgroundColor="#333333">
-						<Label Grid.Row="0" Text="{Binding Location}" FontSize="18" TextColor="Black" />
-						<Label Grid.Row="1" Text="{Binding Notes}" FontSize="16" TextColor="Gray" />
+					<Border Stroke="Black" BackgroundColor="Black" StrokeThickness="4">
+					<Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions=".40*,.20*,.40*" BackgroundColor="#333333">
+						<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Location}" FontSize="18" TextColor="Gray"/>
+						<Label Grid.Row="1" Grid.Column="0" Text="{Binding Notes}" FontSize="16" TextColor="LightGray" />
 						<Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Source="{Binding PhotoPath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
 					</Grid>
 					</Border>

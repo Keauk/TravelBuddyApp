@@ -15,7 +15,6 @@ namespace TravelBuddyApp.Views
 
             BindingContext = new MakeTripViewModel();
             SetEditorHeight();
-            ShowUserAlert();
         }
 
         private void SetEditorHeight()
@@ -23,11 +22,6 @@ namespace TravelBuddyApp.Views
             var fontSize = DescriptionEditor.FontSize;
             var height = fontSize * MaxLines;
             DescriptionEditor.HeightRequest = height;
-        }
-
-        private async void ShowUserAlert()
-        {
-            await DisplayAlert("User Info", $"Username: {_currentUser.Username}", "OK");
         }
     }
 }

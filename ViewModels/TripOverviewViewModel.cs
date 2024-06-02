@@ -38,7 +38,6 @@ namespace TravelBuddyApp.ViewModels
 
         private readonly ApiService _apiService;
 
-        // Parameterless constructor
         public TripOverviewViewModel()
         {
             _apiService = new ApiService();
@@ -46,7 +45,6 @@ namespace TravelBuddyApp.ViewModels
             AddTripLogCommand = new Command(OnAddTripLog);
         }
 
-        // Constructor with TripResponse parameter
         public TripOverviewViewModel(TripResponse trip) : this()
         {
             Trip = trip;

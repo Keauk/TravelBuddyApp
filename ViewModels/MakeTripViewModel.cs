@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
+using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TravelBuddyApp.Models;
 using TravelBuddyApp.Services;
+using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp.ViewModels
 {
@@ -51,15 +53,17 @@ namespace TravelBuddyApp.ViewModels
             var tripInput = new TripInput
             {
                 Title = TripName,
-                Description = Description,
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(7)
+                Description = Description
             };
 
             var response = await _apiService.CreateTripAsync(tripInput);
             if (response.IsSuccessStatusCode)
             {
+                var createdTrip = await response.Content.ReadFromJsonAsync<TripResponse>();
+
                 await Application.Current.MainPage.DisplayAlert("Success", "Trip created successfully!", "OK");
+
+                await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(createdTrip));
             }
             else
             {

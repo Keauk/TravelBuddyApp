@@ -30,6 +30,35 @@ namespace TravelBuddyApp.Services
             return response;
         }
 
+        public async Task<HttpResponseMessage> CreateTripLogAsync(TripLogInput tripLogInput, int tripId)
+        {
+            await AddJwtTokenAsync();
+
+            string url = $"api/trips/{tripId}/triplogs";
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, tripLogInput);
+
+            return response;
+        }
+
+        public async Task<string> UploadPhotoAsync(Stream photoStream, string fileName)
+        {
+            var content = new MultipartFormDataContent();
+            var fileContent = new StreamContent(photoStream);
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            content.Add(fileContent, "file", fileName);
+
+            var response = await _httpClient.PostAsync("api/fileupload/upload", content);
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadFromJsonAsync<UploadResult>();
+            return result.Url;
+        }
+        private class UploadResult
+        {
+            public string Url { get; set; }
+        }
+
         public async Task<HttpResponseMessage> RegisterUserAsync(UserInput userInput)
         {
             var response = await _httpClient.PostAsJsonAsync("api/users", userInput);

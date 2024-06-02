@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelBuddyApp.Views.TripOverviewPage"
+             xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
+             BackgroundColor="Beige"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid ColumnDefinitions=".1*, .8*, .1*" RowDefinitions="20, 50, 50, 100, 18, 100*" Padding="0">
+        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Trip.Title}" FontSize="30" TextColor="Black" />
+        <Label Grid.Column="1" Grid.Row="2" Text="{Binding Trip.Description}" FontSize="18" TextColor="Gray" />
+        <CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="4" BackgroundColor="Black">
+            <CollectionView.EmptyView>
+                <Button Text="CREATE LOG" 
+                        Margin="20"
+                        VerticalOptions="Start" 
+                        HeightRequest="100" 
+                        Command="{Binding AddTripLogCommand}" 
+                        BackgroundColor="#D3D3D3"
+                        FontSize="20"
+                        TextColor="Black"
+                        CornerRadius="0" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>

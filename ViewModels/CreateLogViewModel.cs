@@ -30,7 +30,10 @@ namespace TravelBuddyApp.ViewModels
         public CreateLogViewModel(int tripId)
         {
             TripId = tripId;
-            Log = new TripLogInput();
+            Log = new TripLogInput
+            {
+                Date = DateTime.Today
+            };
             SaveLogCommand = new Command(async () => await OnSaveLog());
             UploadImageCommand = new Command(async () => await OnUploadImage());
             PickLocationCommand = new Command(async () => await OnPickLocation());
@@ -61,7 +64,9 @@ namespace TravelBuddyApp.ViewModels
                 {
                     var stream = await result.OpenReadAsync();
                     var photoUrl = await _apiService.UploadPhotoAsync(stream, result.FileName);
-                    Log.PhotoPath = photoUrl;
+                    Log.PhotoPath = $"http://10.0.2.2:5086{photoUrl}";
+                    Console.WriteLine($"Photo URL: {Log.PhotoPath}");
+
                     OnPropertyChanged(nameof(Log));
                 }
             }

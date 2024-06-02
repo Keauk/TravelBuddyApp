@@ -18,7 +18,7 @@ namespace TravelBuddyApp.Services
 
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri("https://10.0.2.2:7052/")
+                BaseAddress = new Uri("http://10.0.2.2:5086/")
             };
         }
 

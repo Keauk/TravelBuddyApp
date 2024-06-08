@@ -1,5 +1,4 @@
-﻿using System.Net;
-using TravelBuddyApp.Views;
+﻿using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp
 {

@@ -18,6 +18,7 @@ namespace TravelBuddyApp
 
             builder
                 .UseMauiApp<App>()
+                .UseMauiMaps()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {

@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TravelBuddyApp.Models;
 using TravelBuddyApp.Services;
+using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp.ViewModels
 {
@@ -78,23 +79,7 @@ namespace TravelBuddyApp.ViewModels
 
         private async Task OnPickLocation()
         {
-            try
-            {
-                var location = await Geolocation.GetLastKnownLocationAsync();
-                if (location != null)
-                {
-                    Log.Location = $"{location.Latitude}, {location.Longitude}";
-                    OnPropertyChanged(nameof(Log));
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Could not get the location.", "OK");
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to get location: {ex.Message}", "OK");
-            }
+            await Application.Current.MainPage.Navigation.PushAsync(new MapPage());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

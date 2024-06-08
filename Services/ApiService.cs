@@ -1,5 +1,4 @@
-﻿using Kotlin;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using TravelBuddyApp.Models;
 
@@ -12,10 +11,7 @@ namespace TravelBuddyApp.Services
         public ApiService()
         {
            
-            HttpClientHandler handler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-            };
+            HttpClientHandler handler = new HttpClientHandler();
 
             _httpClient = new HttpClient(handler)
             {

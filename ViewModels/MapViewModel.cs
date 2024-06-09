@@ -8,8 +8,8 @@ namespace TravelBuddyApp.ViewModels
     {
         public ICommand ConfirmLocationCommand { get; }
 
-        private Location _selectedLocation;
-        public Location SelectedLocation
+        private Services.Location _selectedLocation;
+        public Services.Location SelectedLocation
         {
             get => _selectedLocation;
             set
@@ -29,8 +29,8 @@ namespace TravelBuddyApp.ViewModels
             if (SelectedLocation != null)
             {
                 // Pass the selected location back to the CreateLogPage
-                await Application.Current.MainPage.Navigation.PopAsync();
                 MessagingCenter.Send(this, "LocationPicked", SelectedLocation);
+                await Application.Current.MainPage.Navigation.PopAsync();
             }
             else
             {

@@ -39,6 +39,22 @@ namespace TravelBuddyApp.ViewModels
             UploadImageCommand = new Command(async () => await OnUploadImage());
             PickLocationCommand = new Command(async () => await OnPickLocation());
             _apiService = new ApiService();
+
+            MessagingCenter.Subscribe<MapViewModel, Services.Location>(this, "LocationPicked", (sender, location) =>
+            {
+                SelectedLocation = location;
+            });
+        }
+
+        private Services.Location _selectedLocation;
+        public Services.Location SelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value;
+                OnPropertyChanged();
+            }
         }
 
         private async Task OnSaveLog()

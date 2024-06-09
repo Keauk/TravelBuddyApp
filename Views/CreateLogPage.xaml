@@ -17,30 +17,25 @@
 
 
         <!-- Location -->
-        <BoxView Grid.Row="5"
-						 Grid.Column="1"
-						 HeightRequest="64"
-						 Margin="10, 0, -5, -10"
-						 Color="Gray"/>
         <Frame Grid.Row="5"
-					   Grid.Column="1"
-					   HeightRequest="64"
-					   Padding="4"
-					   CornerRadius="0"
-					   BorderColor="Black"
-					   BackgroundColor="White"
-					   HasShadow="False"
-					   Margin="0, 0, 0, 0">
-            <Entry Placeholder="Location"
-						   FontSize="20"
-						   VerticalOptions="Center"
-						   IsTextPredictionEnabled="False"
-                           Text="{Binding Log.Location}"
-						   TextColor="Black"
-						   BackgroundColor="Transparent"
-						   PlaceholderColor="Gray"
-						   MaxLength="38"/>
+               Grid.Column="1"
+               HeightRequest="64"
+               Padding="10"
+               BackgroundColor="Beige"
+               BorderColor="Beige"
+               Margin="10, 0, 10, 0">
+            <VerticalStackLayout Spacing="0">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Latitude:" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                    <Label Text="{Binding SelectedLocation.Latitude}" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Longitude:" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                    <Label Text="{Binding SelectedLocation.Longitude}" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
         </Frame>
+
 
         <!-- Pick Location Button -->
         <Button Grid.Row="7" Grid.Column="1" Text="Pick Location" Command="{Binding PickLocationCommand}" TextColor="White" CornerRadius="0" Padding="0" Margin="0"/>

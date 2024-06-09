@@ -13,17 +13,16 @@ namespace TravelBuddyApp.Views
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            var viewModel = BindingContext as MapViewModel;
-            if (viewModel != null)
+            if (BindingContext is MapViewModel viewModel)
             {
-                Location location = new(e.Location.Latitude, e.Location.Longitude);
+                Services.Location location = new(e.Location.Latitude, e.Location.Longitude);
                 viewModel.SelectedLocation = location;
 
                 map.Pins.Clear();
                 map.Pins.Add(new Pin
                 {
                     Label = "Selected Location",
-                    Location = location
+                    Location = new Microsoft.Maui.Devices.Sensors.Location(location.Latitude, location.Longitude)
                 });
             }
         }

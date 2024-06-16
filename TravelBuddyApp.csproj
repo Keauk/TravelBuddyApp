@@ -54,6 +54,10 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.40" />
 		<PackageReference Include="Microsoft.Maui.Maps" Version="8.0.40" />
+		<PackageReference Include="Moq" Version="4.20.70" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.4.3" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.4.3" />
+		<PackageReference Include="xunit" Version="2.8.1" />
 	</ItemGroup>
 
 	<ItemGroup>

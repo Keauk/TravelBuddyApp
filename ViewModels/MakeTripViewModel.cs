@@ -12,12 +12,14 @@ namespace TravelBuddyApp.ViewModels
     public class MakeTripViewModel : INotifyPropertyChanged
     {
         private readonly ApiService _apiService;
+        private readonly int _currentUserId;
         private const int MaxLines = 6;
         private const int MaxCharacters = 200;
 
-        public MakeTripViewModel()
+        public MakeTripViewModel(int currentUserId)
         {
             _apiService = new ApiService();
+            _currentUserId = currentUserId;
             CreateTripCommand = new AsyncRelayCommand(CreateTrip);
         }
 
@@ -63,7 +65,7 @@ namespace TravelBuddyApp.ViewModels
 
                 await Application.Current.MainPage.DisplayAlert("Success", "Trip created successfully!", "OK");
 
-                await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(createdTrip));
+                await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(createdTrip, _currentUserId));
             }
             else
             {

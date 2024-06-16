@@ -6,7 +6,7 @@
              BackgroundColor="Beige"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="300, 60, 14, 25, 40,100" ColumnDefinitions=".125*, .75*, .125*" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Beige">
+    <Grid RowDefinitions="300, 60, 14, 25, 40,50*" ColumnDefinitions=".125*, .75*, .125*" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Beige">
         <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" CornerRadius="0" Padding="0" BackgroundColor="Beige" BorderColor="Beige">
             <Grid RowDefinitions=".30*,.25*,.20*,.25*" Padding="8">
 
@@ -18,5 +18,26 @@
         <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Beige" BorderColor="Beige" CornerRadius="0" Padding="0">
             <BoxView Background="Black"></BoxView>
         </Frame>
+        <CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" Grid.RowSpan="3" ItemsSource="{Binding Trips}" BackgroundColor="Black"
+                        SelectionMode="Single" SelectionChanged="OnTripSelected">
+            <CollectionView.EmptyView>
+                <StackLayout BackgroundColor="Black">
+                    <Label Text="Nothing here. Looks like no one created any trips yet!"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="Orange" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="Black" BackgroundColor="Black" StrokeThickness="4">
+                        <Grid Padding="10" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions=".40*,.20*,.40*" BackgroundColor="#333333">
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Title}" FontSize="18" TextColor="Gray"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Description}" FontSize="16" TextColor="LightGray" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>

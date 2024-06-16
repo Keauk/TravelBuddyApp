@@ -13,7 +13,7 @@ namespace TravelBuddyApp.Views
             InitializeComponent();
             _currentUser = currentUser;
 
-            BindingContext = new MakeTripViewModel();
+            BindingContext = new MakeTripViewModel(currentUser.UserId);
             SetEditorHeight();
         }
 

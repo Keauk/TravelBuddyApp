@@ -6,83 +6,79 @@
              BackgroundColor="Beige"
              NavigationPage.HasNavigationBar="False">
 
-	<ContentPage.BindingContext>
-		<vm:MakeTripViewModel />
-	</ContentPage.BindingContext>
-
-	<Grid RowDefinitions="600, 60, 14, 25, 40, 100" ColumnDefinitions=".125*, .75*, .125*" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Beige">
+    <Grid RowDefinitions="600, 60, 14, 25, 40, 100" ColumnDefinitions=".125*, .75*, .125*" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Beige">
         <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="1" CornerRadius="0" Padding="0" BackgroundColor="Beige" BorderColor="Beige">
             <Grid RowDefinitions=".15*, .05*, .06*, .25*, 0.20*" Padding="8">
 
-				<!-- Trip Name Entry BoxView (Shadow) -->
-				<BoxView Grid.Row="1"
-						 Grid.Column="1"
-						 HeightRequest="64"
-						 Margin="14, 4, -5, 0"
-						 Color="Gray"/>
+                <!-- Trip Name Entry BoxView (Shadow) -->
+                <BoxView Grid.Row="1"
+                         Grid.Column="1"
+                         HeightRequest="64"
+                         Margin="14, 4, -5, 0"
+                         Color="Gray"/>
 
-				<!-- Trip Name Entry Frame -->
-				<Frame Grid.Row="1"
-					   Grid.Column="1"
-					   HeightRequest="64"
-					   Padding="4"
-					   CornerRadius="0"
-					   BorderColor="Black"
-					   BackgroundColor="White"
-					   HasShadow="False"
-					   Margin="10, 0, 0, 10">
-					<Entry Placeholder="Trip Name"
-						   FontSize="20"
-						   VerticalOptions="Center"
-						   IsTextPredictionEnabled="False"
+                <!-- Trip Name Entry Frame -->
+                <Frame Grid.Row="1"
+                       Grid.Column="1"
+                       HeightRequest="64"
+                       Padding="4"
+                       CornerRadius="0"
+                       BorderColor="Black"
+                       BackgroundColor="White"
+                       HasShadow="False"
+                       Margin="10, 0, 0, 10">
+                    <Entry Placeholder="Trip Name"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           IsTextPredictionEnabled="False"
                            Text="{Binding TripName, Mode=TwoWay}"
-						   TextColor="Black"
-						   BackgroundColor="Transparent"
-						   PlaceholderColor="Gray"
-						   MaxLength="38"/>
-				</Frame>
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="Gray"
+                           MaxLength="38"/>
+                </Frame>
 
-				<!-- Trip Name Entry BoxView (Shadow) -->
-				<BoxView Grid.Row="3"
-						 Grid.Column="1"
-						 HeightRequest="196"
-						 Margin="14, 4, -5, 0"
-						 Color="Gray"/>
+                <!-- Trip Name Entry BoxView (Shadow) -->
+                <BoxView Grid.Row="3"
+                         Grid.Column="1"
+                         HeightRequest="196"
+                         Margin="14, 4, -5, 0"
+                         Color="Gray"/>
 
-				<!-- Trip Description Entry Frame -->
-				<Frame Grid.Row="3"
-					   Grid.Column="1"
-					   Padding="4"
-					   CornerRadius="0"
-					   BorderColor="Black"
-					   BackgroundColor="White"
-					   HasShadow="False"
-					   Margin="10, 0, 0, 10">
-					<Editor x:Name="DescriptionEditor"
-						   Placeholder="Description"
-						   FontSize="20"
-						   IsTextPredictionEnabled="False"
+                <!-- Trip Description Entry Frame -->
+                <Frame Grid.Row="3"
+                       Grid.Column="1"
+                       Padding="4"
+                       CornerRadius="0"
+                       BorderColor="Black"
+                       BackgroundColor="White"
+                       HasShadow="False"
+                       Margin="10, 0, 0, 10">
+                    <Editor x:Name="DescriptionEditor"
+                           Placeholder="Description"
+                           FontSize="20"
+                           IsTextPredictionEnabled="False"
                            Text="{Binding Description, Mode=TwoWay}"
-						   TextColor="Black"
-						   BackgroundColor="Transparent"
-						   PlaceholderColor="Gray"
-						   VerticalOptions="Start"
-						   AutoSize="TextChanges"
-						   HeightRequest="200"/>
-				</Frame>
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="Gray"
+                           VerticalOptions="Start"
+                           AutoSize="TextChanges"
+                           HeightRequest="200"/>
+                </Frame>
 
-				<!-- Create Trip Button -->
-				<Button Grid.Row="4"
-						Grid.Column="1"
-						Text="Create"
-						FontSize="24"
-						TextColor="White"
-						BackgroundColor="Black"
-						CornerRadius="0"
-						HeightRequest="60"
-						Margin="10, 0, 0, 10"
-						HorizontalOptions="FillAndExpand"
-						Command="{Binding CreateTripCommand}"/>
+                <!-- Create Trip Button -->
+                <Button Grid.Row="4"
+                        Grid.Column="1"
+                        Text="Create"
+                        FontSize="24"
+                        TextColor="White"
+                        BackgroundColor="Black"
+                        CornerRadius="0"
+                        HeightRequest="60"
+                        Margin="10, 0, 0, 10"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding CreateTripCommand}"/>
 
             </Grid>
         </Frame>

@@ -5,10 +5,10 @@ namespace TravelBuddyApp.Views
 {
     public partial class TripOverviewPage : ContentPage
     {
-        public TripOverviewPage(TripResponse trip)
+        public TripOverviewPage(TripResponse trip, int currentUserId)
         {
             InitializeComponent();
-            BindingContext = new TripOverviewViewModel(trip);
+            BindingContext = new TripOverviewViewModel(trip, currentUserId);
         }
 
         protected override void OnAppearing()

@@ -37,15 +37,17 @@ namespace TravelBuddyApp.ViewModels
         public ICommand AddTripLogCommand { get; }
 
         private readonly ApiService _apiService;
+        private int _currentUserId;
 
-        public TripOverviewViewModel()
+        public TripOverviewViewModel(int currentUserId)
         {
             _apiService = new ApiService();
+            _currentUserId = currentUserId;
             Logs = new ObservableCollection<TripLogResponse>();
             AddTripLogCommand = new Command(OnAddTripLog);
         }
 
-        public TripOverviewViewModel(TripResponse trip) : this()
+        public TripOverviewViewModel(TripResponse trip, int currentUserId) : this(currentUserId)
         {
             Trip = trip;
         }
@@ -81,7 +83,14 @@ namespace TravelBuddyApp.ViewModels
         {
             if (Trip != null)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId));
+                if (Trip.UserId == _currentUserId)
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId));
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Unauthorized", "You do not have permission to add logs to this trip.", "OK");
+                }
             }
         }
 

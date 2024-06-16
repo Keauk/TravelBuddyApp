@@ -5,9 +5,12 @@ namespace TravelBuddyApp.Views
 {
     public partial class MyTripsPage : ContentPage
     {
+        private readonly UserResponse _currentUser;
+
         public MyTripsPage(UserResponse userResponse)
         {
             InitializeComponent();
+            _currentUser = userResponse;
             BindingContext = new MyTripsViewModel(userResponse);
         }
 
@@ -17,7 +20,7 @@ namespace TravelBuddyApp.Views
             {
                 if (e.CurrentSelection[0] is TripResponse selectedTrip)
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(selectedTrip));
+                    await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(selectedTrip, _currentUser.UserId));
                 }
 
                 // Deselect the item

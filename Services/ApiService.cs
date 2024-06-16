@@ -103,6 +103,22 @@ namespace TravelBuddyApp.Services
             return await response.Content.ReadFromJsonAsync<IEnumerable<TripResponse>>();
         }
 
+        public async Task<IEnumerable<TripResponse>> GetAllTripsAsync()
+        {
+            await AddJwtTokenAsync();
+
+            var url = "api/trips";
+
+            HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new List<TripResponse>();
+            }
+
+            return await response.Content.ReadFromJsonAsync<IEnumerable<TripResponse>>();
+        }
+
         public async Task<UserResponse> GetCurrentUserAsync()
         {
             await AddJwtTokenAsync();

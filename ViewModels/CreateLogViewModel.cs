@@ -59,6 +59,11 @@ namespace TravelBuddyApp.ViewModels
 
         private async Task OnSaveLog()
         {
+            if (SelectedLocation != null)
+            {
+                Log.Location = $"{SelectedLocation.Latitude}, {SelectedLocation.Longitude}";
+            }
+
             HttpResponseMessage response = await _apiService.CreateTripLogAsync(Log, TripId);
 
             if (response.IsSuccessStatusCode)

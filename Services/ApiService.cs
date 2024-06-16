@@ -22,7 +22,10 @@ namespace TravelBuddyApp.Services
         public async Task<HttpResponseMessage> CreateTripAsync(TripInput tripInput)
         {
             await AddJwtTokenAsync();
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("api/trips", tripInput);
+
+            string url = "api/trips";
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(url, tripInput);
 
             return response;
         }
@@ -38,8 +41,11 @@ namespace TravelBuddyApp.Services
             return response;
         }
 
+
         public async Task<string> UploadPhotoAsync(Stream photoStream, string fileName)
         {
+            await AddJwtTokenAsync();
+
             var content = new MultipartFormDataContent();
             var fileContent = new StreamContent(photoStream);
             fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");

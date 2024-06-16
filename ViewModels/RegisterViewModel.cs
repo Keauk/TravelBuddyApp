@@ -52,9 +52,6 @@ namespace TravelBuddyApp.ViewModels
             if (response.IsSuccessStatusCode)
             {
                 await Application.Current.MainPage.DisplayAlert("Success", "User registered successfully!", "OK");
-
-                // Navigate back to main page if user is successfully created. 
-                await Shell.Current.GoToAsync("//MainPage");
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TravelBuddyApp.Models;
@@ -40,14 +41,14 @@ namespace TravelBuddyApp.ViewModels
             PickLocationCommand = new Command(async () => await OnPickLocation());
             _apiService = new ApiService();
 
-            MessagingCenter.Subscribe<MapViewModel, Services.Location>(this, "LocationPicked", (sender, location) =>
+            MessagingCenter.Subscribe<MapViewModel, Location>(this, "LocationPicked", (sender, location) =>
             {
                 SelectedLocation = location;
             });
         }
 
-        private Services.Location _selectedLocation;
-        public Services.Location SelectedLocation
+        private Location _selectedLocation;
+        public Location SelectedLocation
         {
             get => _selectedLocation;
             set
@@ -57,11 +58,16 @@ namespace TravelBuddyApp.ViewModels
             }
         }
 
-        private async Task OnSaveLog()
+        public async Task OnSaveLog()
         {
             if (SelectedLocation != null)
             {
                 Log.Location = $"{SelectedLocation.Latitude}, {SelectedLocation.Longitude}";
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Please select a location.", "OK");
+                return;
             }
 
             HttpResponseMessage response = await _apiService.CreateTripLogAsync(Log, TripId);
@@ -73,7 +79,8 @@ namespace TravelBuddyApp.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Failed to save trip log", "OK");
+                string responseBody = await response.Content.ReadAsStringAsync();
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to save trip log: {responseBody}", "OK");
             }
         }
 
@@ -100,7 +107,7 @@ namespace TravelBuddyApp.ViewModels
 
         private async Task OnPickLocation()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new MapPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new MapPage(new MapViewModel()));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -35,7 +35,6 @@ namespace TravelBuddyApp
 
             // Register services
             builder.Services.AddSingleton<ApiService>();
-            builder.Services.AddSingleton<LocationService>();
 
             // Register ViewModels
             builder.Services.AddTransient<RegisterViewModel>();

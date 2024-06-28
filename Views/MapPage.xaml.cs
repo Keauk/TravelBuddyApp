@@ -1,29 +1,41 @@
-﻿using TravelBuddyApp.ViewModels;
-using Microsoft.Maui.Controls.Maps;
+﻿using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
+using TravelBuddyApp.ViewModels;
 
 namespace TravelBuddyApp.Views
 {
     public partial class MapPage : ContentPage
     {
-        public MapPage()
+        private readonly MapViewModel viewModel;
+
+        public MapPage(MapViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext = new MapViewModel();
+            BindingContext = this.viewModel = viewModel;
+
+            viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            if (BindingContext is MapViewModel viewModel)
+            if (viewModel != null)
             {
-                Services.Location location = new(e.Location.Latitude, e.Location.Longitude);
-                viewModel.SelectedLocation = location;
+                viewModel.OnMapClickedCommand.Execute(e);
+            }
+        }
 
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(MapViewModel.Pin))
+            {
                 map.Pins.Clear();
-                map.Pins.Add(new Pin
+                if (viewModel.Pin != null)
                 {
-                    Label = "Selected Location",
-                    Location = new Microsoft.Maui.Devices.Sensors.Location(location.Latitude, location.Longitude)
-                });
+                    map.Pins.Add(viewModel.Pin);
+
+                    // Move and zoom the map to 10km above the pin
+                    map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(viewModel.Pin.Location.Latitude, viewModel.Pin.Location.Longitude), Distance.FromKilometers(10)));
+                }
             }
         }
     }

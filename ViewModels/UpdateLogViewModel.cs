@@ -30,15 +30,16 @@ namespace TravelBuddyApp.ViewModels
         private readonly IApiService _apiService;
         private readonly IGeolocationService _geolocationService;
 
-        public UpdateLogViewModel(TripLogResponse TripLog, IApiService apiService, IGeolocationService geolocationService)
+        public UpdateLogViewModel(TripLogResponse tripLog, IApiService apiService, IGeolocationService geolocationService)
         {
             Log = new TripLogInput
             {
-                Location = TripLog.Location,
-                Notes = TripLog.Notes,
-                PhotoPath = TripLog.PhotoPath,
+                Location = tripLog.Location,
+                Notes = tripLog.Notes,
+                PhotoPath = tripLog.PhotoPath,
                 Date = DateTime.Today
             };
+
             SaveLogCommand = new Command(async () => await OnSaveLog());
             UploadImageCommand = new Command(async () => await OnUploadImage());
             PickLocationCommand = new Command(async () => await OnPickLocation());

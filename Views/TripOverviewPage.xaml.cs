@@ -6,20 +6,20 @@ namespace TravelBuddyApp.Views
 {
     public partial class TripOverviewPage : ContentPage
     {
+        private TripOverviewViewModel _viewModel;
+
         public TripOverviewPage(TripResponse trip, int currentUserId, IApiService apiService, IGeolocationService geolocationService)
         {
             InitializeComponent();
-            BindingContext = new TripOverviewViewModel(trip, currentUserId, apiService, geolocationService);
+            _viewModel = new TripOverviewViewModel(trip, currentUserId, apiService, geolocationService);
+            BindingContext = _viewModel;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (BindingContext is TripOverviewViewModel viewModel)
-            {
-                viewModel.LoadLogs();
-            }
+            _viewModel.LoadLogs();
         }
     }
 }

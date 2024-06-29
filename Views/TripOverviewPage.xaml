@@ -18,7 +18,9 @@
                 TextColor="White"
                 CornerRadius="0" />
         <BoxView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" BackgroundColor="Black"></BoxView>
-        <CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="2" ItemsSource="{Binding Logs}" BackgroundColor="Black">
+        <CollectionView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="2" ItemsSource="{Binding Logs}" BackgroundColor="Black"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedTripLog}">
             <CollectionView.EmptyView>
                 <StackLayout BackgroundColor="Black">
                     <Label Text="No logs available. Create a new log to get started."

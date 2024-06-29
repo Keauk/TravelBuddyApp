@@ -23,6 +23,22 @@ namespace TravelBuddyApp.ViewModels
             }
         }
 
+        private TripLogResponse _selectedTripLog;
+        public TripLogResponse SelectedTripLog
+        {
+            get => _selectedTripLog;
+            set
+            {
+                _selectedTripLog = value;
+                OnPropertyChanged();
+                if (_selectedTripLog != null)
+                {
+                    OnClickTripLog(_selectedTripLog);
+                    SelectedTripLog = null;
+                }
+            }
+        }
+
         private ObservableCollection<TripLogResponse> _logs;
         public ObservableCollection<TripLogResponse> Logs
         {
@@ -35,6 +51,7 @@ namespace TravelBuddyApp.ViewModels
         }
 
         public ICommand AddTripLogCommand { get; }
+        public ICommand UpdateTripLogCommand { get; }
 
         private readonly IApiService _apiService;
         private readonly IGeolocationService _geolocationService;
@@ -49,7 +66,7 @@ namespace TravelBuddyApp.ViewModels
             _currentUserId = currentUserId;
             Logs = new ObservableCollection<TripLogResponse>();
             AddTripLogCommand = new Command(OnAddTripLog);
-
+            UpdateTripLogCommand = new Command<TripLogResponse>(async (log) => await OnClickTripLog(log));
             Trip = trip;
         }
 
@@ -82,16 +99,25 @@ namespace TravelBuddyApp.ViewModels
 
         private async void OnAddTripLog()
         {
-            if (Trip != null)
+            if (Trip != null && Trip.UserId == _currentUserId)
             {
-                if (Trip.UserId == _currentUserId)
-                {
-                    await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId, _apiService, _geolocationService));
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Unauthorized", "You do not have permission to add logs to this trip.", "OK");
-                }
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId, _apiService, _geolocationService));
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Unauthorized", "You do not have permission to add logs to this trip.", "OK");
+            }
+        }
+
+        public async Task OnClickTripLog(TripLogResponse tripLog)
+        {
+            if (Trip != null && Trip.UserId == _currentUserId)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new UpdateLogPage(tripLog, _apiService, _geolocationService));
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Unauthorized", "You do not have permission to edit this trip log.", "OK");
             }
         }
 

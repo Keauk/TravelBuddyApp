@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelBuddyApp.Views.UpdateLogPage"
+             xmlns:vm="clr-namespace:TravelBuddyApp.ViewModels"
+             BackgroundColor="Beige"
+             Title="Update Log"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid Padding="0" RowDefinitions="50,100,10,50,20,90,5,50,20,90,10,90,10,90" ColumnDefinitions="0.22*, *, 0.04*, *, 0.22*">
+
+        <Image Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Source="{Binding Log.PhotoPath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
+
+        <!-- Upload Image Button -->
+        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="Upload Image" Command="{Binding UploadImageCommand}" CornerRadius="0" Margin="0"/>
+
+        <!-- Location -->
+        <Frame Grid.Row="5"
+               Grid.Column="1"
+               Grid.ColumnSpan="3"
+               HeightRequest="64"
+               Padding="10"
+               BackgroundColor="Beige"
+               BorderColor="Beige"
+               Margin="10, 0, 10, 0">
+            <VerticalStackLayout Spacing="0">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Latitude:" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                    <Label Text="{Binding SelectedLocation.Latitude}" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Longitude:" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                    <Label Text="{Binding SelectedLocation.Longitude}" FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Pick Location Button -->
+        <Button Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1" Text="Pick Location" Command="{Binding PickLocationCommand}" TextColor="White" CornerRadius="0" Padding="0" Margin="0"/>
+        <Button Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="1" Text="Select Current Location" Command="{Binding PickGpsLocationCommand}" TextColor="White" CornerRadius="0" Padding="0" Margin="0"/>
+
+        <!-- Notes Editor -->
+        <BoxView Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" HeightRequest="64" Margin="10, 0, -5, -10" Color="Gray"/>
+        <Frame Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" HeightRequest="64" Padding="4" CornerRadius="0" BorderColor="Black" BackgroundColor="White" HasShadow="False" Margin="0, 0, 0, 0">
+            <Entry Placeholder="Notes" FontSize="20" VerticalOptions="Center" IsTextPredictionEnabled="False" Text="{Binding Log.Notes}" TextColor="Black" BackgroundColor="Transparent" PlaceholderColor="Gray" MaxLength="38"/>
+        </Frame>
+
+        <!-- Date Picker -->
+        <DatePicker Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" Date="{Binding Log.Date}"/>
+
+        <!-- Save Log Button -->
+        <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" Text="Save Log" Command="{Binding SaveLogCommand}" CornerRadius="0" Margin="0,20,0,0"/>
+    </Grid>
+</ContentPage>

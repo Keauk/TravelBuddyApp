@@ -1,16 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using TravelBuddyApp.Models;
 using System.Net.Http.Json;
+using TravelBuddyApp.Interfaces;
 
 namespace TravelBuddyApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
         private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
 
-        public LoginViewModel(IApiService apiService)
+        public LoginViewModel(IApiService apiService, IGeolocationService geolocationService)
         {
             _apiService = apiService;
+            _geolocationService = geolocationService;
+
             LoginCommand = new AsyncRelayCommand(OnLogin);
         }
 
@@ -49,7 +53,7 @@ namespace TravelBuddyApp.ViewModels
 
                     // Get current user info and navigate to LandingPage
                     var user = await _apiService.GetCurrentUserAsync();
-                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage(user, _apiService));
+                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage(user, _apiService, _geolocationService));
                 }
             }
             else

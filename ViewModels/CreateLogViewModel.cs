@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using TravelBuddyApp.Interfaces;
 using TravelBuddyApp.Models;
 using TravelBuddyApp.Views;
 
@@ -27,8 +28,9 @@ namespace TravelBuddyApp.ViewModels
         public ICommand PickGpsLocationCommand { get; }
 
         private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
 
-        public CreateLogViewModel(int tripId, IApiService apiService)
+        public CreateLogViewModel(int tripId, IApiService apiService, IGeolocationService geolocationService)
         {
             TripId = tripId;
             Log = new TripLogInput
@@ -39,7 +41,9 @@ namespace TravelBuddyApp.ViewModels
             UploadImageCommand = new Command(async () => await OnUploadImage());
             PickLocationCommand = new Command(async () => await OnPickLocation());
             PickGpsLocationCommand = new Command(async () => await OnPickGpsLocation());
+
             _apiService = apiService;
+            _geolocationService = geolocationService;
 
             MessagingCenter.Subscribe<MapViewModel, Location>(this, "LocationPicked", (sender, location) =>
             {
@@ -113,7 +117,7 @@ namespace TravelBuddyApp.ViewModels
 
         private async Task OnPickGpsLocation()
         {
-            SelectedLocation = await Geolocation.GetLastKnownLocationAsync();
+            SelectedLocation = await _geolocationService.GetLastKnownLocationAsync();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

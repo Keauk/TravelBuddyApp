@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
 using TravelBuddyApp.Views;
 using System.Diagnostics;
+using TravelBuddyApp.Interfaces;
 
 namespace TravelBuddyApp.ViewModels
 {
@@ -36,19 +36,20 @@ namespace TravelBuddyApp.ViewModels
 
         public ICommand AddTripLogCommand { get; }
 
-        private readonly ApiService _apiService;
+        private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
+
         private int _currentUserId;
 
-        public TripOverviewViewModel(int currentUserId)
+        public TripOverviewViewModel(TripResponse trip, int currentUserId, IApiService apiService, IGeolocationService geolocationService)
         {
-            _apiService = new ApiService();
+            _apiService = apiService;
+            _geolocationService = geolocationService;
+
             _currentUserId = currentUserId;
             Logs = new ObservableCollection<TripLogResponse>();
             AddTripLogCommand = new Command(OnAddTripLog);
-        }
 
-        public TripOverviewViewModel(TripResponse trip, int currentUserId) : this(currentUserId)
-        {
             Trip = trip;
         }
 
@@ -85,7 +86,7 @@ namespace TravelBuddyApp.ViewModels
             {
                 if (Trip.UserId == _currentUserId)
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId, _apiService));
+                    await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId, _apiService, _geolocationService));
                 }
                 else
                 {

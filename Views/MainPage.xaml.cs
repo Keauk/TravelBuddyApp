@@ -1,13 +1,14 @@
-﻿using TravelBuddyApp.ViewModels; 
+﻿using TravelBuddyApp.Interfaces;
+using TravelBuddyApp.ViewModels; 
 
 namespace TravelBuddyApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(IApiService apiService)
+        public MainPage(IApiService apiService, IGeolocationService geolocationService)
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel(apiService);
+            BindingContext = new LoginViewModel(apiService, geolocationService);
         }
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using TravelBuddyApp.Models;
+﻿using TravelBuddyApp.Interfaces;
+using TravelBuddyApp.Models;
 using TravelBuddyApp.ViewModels;
 
 namespace TravelBuddyApp.Views
@@ -6,14 +7,19 @@ namespace TravelBuddyApp.Views
     public partial class MakeTripPage : ContentPage
     {
         private const int MaxLines = 6;
+
+        private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
         private readonly UserResponse _currentUser;
 
-        public MakeTripPage(UserResponse currentUser)
+        public MakeTripPage(UserResponse currentUser, IApiService apiService, IGeolocationService geolocationService)
         {
-            InitializeComponent();
+            _apiService = apiService;
             _currentUser = currentUser;
 
-            BindingContext = new MakeTripViewModel(currentUser.UserId);
+            InitializeComponent();
+
+            BindingContext = new MakeTripViewModel(currentUser.UserId, apiService, geolocationService);
             SetEditorHeight();
         }
 

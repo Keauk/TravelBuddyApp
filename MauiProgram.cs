@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using TravelBuddyApp.Interfaces;
+
 
 #if ANDROID
 using TravelBuddyApp.Platforms.Android;
@@ -35,6 +37,7 @@ namespace TravelBuddyApp
 
             // Register services
             builder.Services.AddSingleton<IApiService, ApiService>();
+            builder.Services.AddSingleton<IGeolocationService, GeolocationService>();
 
             // Register ViewModels
             builder.Services.AddTransient<RegisterViewModel>();

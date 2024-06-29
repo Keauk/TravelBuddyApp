@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
 using System.Diagnostics;
 using TravelBuddyApp.Views;
+using TravelBuddyApp.Interfaces;
 
 namespace TravelBuddyApp.ViewModels
 {
@@ -24,13 +24,17 @@ namespace TravelBuddyApp.ViewModels
 
         public ICommand AddTripCommand { get; }
 
-        private readonly ApiService _apiService;
+        private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
+
         private readonly UserResponse _user;
 
-        public MyTripsViewModel(UserResponse userResponse)
+        public MyTripsViewModel(UserResponse userResponse, IApiService apiService, IGeolocationService geolocationService)
         {
-            _apiService = new ApiService();
+            _apiService = apiService;
+            _geolocationService = geolocationService;
             _user = userResponse;
+
             Trips = new ObservableCollection<TripResponse>();
             AddTripCommand = new Command(OnAddTrip);
             LoadTrips();
@@ -63,7 +67,7 @@ namespace TravelBuddyApp.ViewModels
         private async void OnAddTrip()
         {
             // Navigate to the page to create a new trip
-            await Application.Current.MainPage.Navigation.PushAsync(new MakeTripPage(_user));
+            await Application.Current.MainPage.Navigation.PushAsync(new MakeTripPage(_user, _apiService, _geolocationService));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

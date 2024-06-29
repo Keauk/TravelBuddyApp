@@ -1,9 +1,7 @@
 ﻿using Moq;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+using TravelBuddyApp.Interfaces;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
 using TravelBuddyApp.ViewModels;
 using Xunit;
 
@@ -12,12 +10,15 @@ namespace TravelBuddyApp.UnitTests
     public class CreateLogViewModelTests
     {
         private readonly Mock<IApiService> _apiServiceMock;
+        private readonly Mock<IGeolocationService> _geolocationServiceMock;
         private readonly CreateLogViewModel _viewModel;
 
         public CreateLogViewModelTests()
         {
             _apiServiceMock = new Mock<IApiService>();
-            _viewModel = new CreateLogViewModel(1, _apiServiceMock.Object);
+            _geolocationServiceMock = new Mock<IGeolocationService>();
+
+            _viewModel = new CreateLogViewModel(1, _apiServiceMock.Object, _geolocationServiceMock.Object);
         }
 
         [Fact]

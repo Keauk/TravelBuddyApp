@@ -3,22 +3,26 @@ using System.ComponentModel;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using TravelBuddyApp.Interfaces;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
 using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp.ViewModels
 {
     public class MakeTripViewModel : INotifyPropertyChanged
     {
-        private readonly ApiService _apiService;
+        private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
+
         private readonly int _currentUserId;
         private const int MaxLines = 6;
         private const int MaxCharacters = 200;
 
-        public MakeTripViewModel(int currentUserId)
+        public MakeTripViewModel(int currentUserId, IApiService apiService, IGeolocationService geolocationService)
         {
-            _apiService = new ApiService();
+            _apiService = apiService;
+            _geolocationService = geolocationService;
+
             _currentUserId = currentUserId;
             CreateTripCommand = new AsyncRelayCommand(CreateTrip);
         }
@@ -65,7 +69,7 @@ namespace TravelBuddyApp.ViewModels
 
                 await Application.Current.MainPage.DisplayAlert("Success", "Trip created successfully!", "OK");
 
-                await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(createdTrip, _currentUserId));
+                await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(createdTrip, _currentUserId, _apiService, _geolocationService));
             }
             else
             {

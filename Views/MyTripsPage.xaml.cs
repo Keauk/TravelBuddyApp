@@ -1,4 +1,5 @@
-﻿using TravelBuddyApp.Models;
+﻿using TravelBuddyApp.Interfaces;
+using TravelBuddyApp.Models;
 using TravelBuddyApp.ViewModels;
 
 namespace TravelBuddyApp.Views
@@ -6,12 +7,18 @@ namespace TravelBuddyApp.Views
     public partial class MyTripsPage : ContentPage
     {
         private readonly UserResponse _currentUser;
+        private readonly IApiService _apiService;
+        private readonly IGeolocationService _geolocationService;
 
-        public MyTripsPage(UserResponse userResponse)
+        public MyTripsPage(UserResponse userResponse, IApiService apiService, IGeolocationService geolocationService)
         {
-            InitializeComponent();
+            _apiService = apiService;
+            _geolocationService = geolocationService;
             _currentUser = userResponse;
-            BindingContext = new MyTripsViewModel(userResponse);
+
+            InitializeComponent();
+
+            BindingContext = new MyTripsViewModel(userResponse, apiService, geolocationService);
         }
 
         private async void OnTripSelected(object sender, SelectionChangedEventArgs e)
@@ -20,7 +27,7 @@ namespace TravelBuddyApp.Views
             {
                 if (e.CurrentSelection[0] is TripResponse selectedTrip)
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(selectedTrip, _currentUser.UserId));
+                    await Application.Current.MainPage.Navigation.PushAsync(new TripOverviewPage(selectedTrip, _currentUser.UserId, _apiService, _geolocationService));
                 }
 
                 // Deselect the item

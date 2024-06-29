@@ -24,6 +24,7 @@ namespace TravelBuddyApp.ViewModels
         public ICommand SaveLogCommand { get; }
         public ICommand UploadImageCommand { get; }
         public ICommand PickLocationCommand { get; }
+        public ICommand PickGpsLocationCommand { get; }
 
         private readonly IApiService _apiService;
 
@@ -37,6 +38,7 @@ namespace TravelBuddyApp.ViewModels
             SaveLogCommand = new Command(async () => await OnSaveLog());
             UploadImageCommand = new Command(async () => await OnUploadImage());
             PickLocationCommand = new Command(async () => await OnPickLocation());
+            PickGpsLocationCommand = new Command(async () => await OnPickGpsLocation());
             _apiService = apiService;
 
             MessagingCenter.Subscribe<MapViewModel, Location>(this, "LocationPicked", (sender, location) =>
@@ -45,16 +47,17 @@ namespace TravelBuddyApp.ViewModels
             });
         }
 
-        private Location _selectedLocation;
-        public Location SelectedLocation
+        private Location? _selectedLocation;
+        public Location? SelectedLocation
         {
             get => _selectedLocation;
-            set
+            private set
             {
                 _selectedLocation = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedLocation));
             }
         }
+
 
         public async Task OnSaveLog()
         {
@@ -106,6 +109,11 @@ namespace TravelBuddyApp.ViewModels
         private async Task OnPickLocation()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new MapPage(new MapViewModel()));
+        }
+
+        private async Task OnPickGpsLocation()
+        {
+            SelectedLocation = await Geolocation.GetLastKnownLocationAsync();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

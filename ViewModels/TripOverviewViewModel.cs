@@ -85,7 +85,7 @@ namespace TravelBuddyApp.ViewModels
             {
                 if (Trip.UserId == _currentUserId)
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId));
+                    await Application.Current.MainPage.Navigation.PushAsync(new CreateLogPage(Trip.TripId, _apiService));
                 }
                 else
                 {

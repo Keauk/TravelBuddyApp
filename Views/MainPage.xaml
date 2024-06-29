@@ -6,11 +6,6 @@
              BackgroundColor="Beige"
              NavigationPage.HasNavigationBar="False">
 
-
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel />
-    </ContentPage.BindingContext>
-
     <Grid RowDefinitions="100, 0, 70, Auto, Auto, 0, 80, 60, 80"
           ColumnDefinitions=".125*, .75*, .125*"
           RowSpacing="10"

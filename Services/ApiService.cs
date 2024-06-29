@@ -4,7 +4,7 @@ using TravelBuddyApp.Models;
 
 namespace TravelBuddyApp.Services
 {
-    public class ApiService
+    public class ApiService : IApiService
     {
         private readonly HttpClient _httpClient;
 

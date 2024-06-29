@@ -7,12 +7,12 @@ namespace TravelBuddyApp.Views
     {
         private readonly UserResponse _currentUser;
 
-        public LandingPage(UserResponse user)
+        public LandingPage(UserResponse user, IApiService apiService)
         {
             InitializeComponent();
             _currentUser = user;
 
-            BindingContext = new LandingPageViewModel(user);
+            BindingContext = new LandingPageViewModel(user, apiService);
         }
 
         private async void OnMakeTripButtonClicked(object sender, EventArgs e)

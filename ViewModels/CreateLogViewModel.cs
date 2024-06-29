@@ -1,9 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
 using TravelBuddyApp.Views;
 
 namespace TravelBuddyApp.ViewModels
@@ -27,9 +25,9 @@ namespace TravelBuddyApp.ViewModels
         public ICommand UploadImageCommand { get; }
         public ICommand PickLocationCommand { get; }
 
-        private readonly ApiService _apiService;
+        private readonly IApiService _apiService;
 
-        public CreateLogViewModel(int tripId)
+        public CreateLogViewModel(int tripId, IApiService apiService)
         {
             TripId = tripId;
             Log = new TripLogInput
@@ -39,7 +37,7 @@ namespace TravelBuddyApp.ViewModels
             SaveLogCommand = new Command(async () => await OnSaveLog());
             UploadImageCommand = new Command(async () => await OnUploadImage());
             PickLocationCommand = new Command(async () => await OnPickLocation());
-            _apiService = new ApiService();
+            _apiService = apiService;
 
             MessagingCenter.Subscribe<MapViewModel, Location>(this, "LocationPicked", (sender, location) =>
             {

@@ -2,12 +2,15 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
 
 namespace TravelBuddyApp.ViewModels
 {
     internal class LandingPageViewModel : INotifyPropertyChanged
     {
+
+        private readonly IApiService _apiService;
+        private readonly UserResponse _user;
+
         private string _welcomeMessage;
         public string WelcomeMessage
         {
@@ -30,8 +33,13 @@ namespace TravelBuddyApp.ViewModels
             }
         }
 
-        private readonly ApiService _apiService;
-        private readonly UserResponse _user;
+        public LandingPageViewModel(UserResponse user, IApiService apiService)
+        {
+            LoadData(user);
+            _apiService = apiService;
+            Trips = new ObservableCollection<TripResponse>();
+            LoadTrips();
+        }
 
         public async void LoadTrips()
         {
@@ -52,14 +60,6 @@ namespace TravelBuddyApp.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "An unexpected error occurred.", "OK");
             }
-        }
-
-        public LandingPageViewModel(UserResponse user)
-        {
-            LoadData(user);
-            _apiService = new ApiService();
-            Trips = new ObservableCollection<TripResponse>();
-            LoadTrips();
         }
 
         private async void LoadData(UserResponse user)

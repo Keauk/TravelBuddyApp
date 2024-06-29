@@ -11,13 +11,13 @@ namespace TravelBuddyApp.UnitTests
 {
     public class CreateLogViewModelTests
     {
-        private readonly Mock<ApiService> _apiServiceMock;
+        private readonly Mock<IApiService> _apiServiceMock;
         private readonly CreateLogViewModel _viewModel;
 
         public CreateLogViewModelTests()
         {
-            _apiServiceMock = new Mock<ApiService>();
-            _viewModel = new CreateLogViewModel(1);
+            _apiServiceMock = new Mock<IApiService>();
+            _viewModel = new CreateLogViewModel(1, _apiServiceMock.Object);
         }
 
         [Fact]

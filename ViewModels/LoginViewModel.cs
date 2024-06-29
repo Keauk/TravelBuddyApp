@@ -1,20 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
 using TravelBuddyApp.Models;
-using TravelBuddyApp.Services;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 using System.Net.Http.Json;
 
 namespace TravelBuddyApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private readonly ApiService _apiService;
+        private readonly IApiService _apiService;
 
-        public LoginViewModel()
+        public LoginViewModel(IApiService apiService)
         {
-            _apiService = new ApiService();
+            _apiService = apiService;
             LoginCommand = new AsyncRelayCommand(OnLogin);
         }
 
@@ -53,7 +49,7 @@ namespace TravelBuddyApp.ViewModels
 
                     // Get current user info and navigate to LandingPage
                     var user = await _apiService.GetCurrentUserAsync();
-                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage(user));
+                    await Application.Current.MainPage.Navigation.PushAsync(new Views.LandingPage(user, _apiService));
                 }
             }
             else

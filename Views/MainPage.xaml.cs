@@ -4,9 +4,10 @@ namespace TravelBuddyApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(IApiService apiService)
         {
             InitializeComponent();
+            BindingContext = new LoginViewModel(apiService);
         }
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)

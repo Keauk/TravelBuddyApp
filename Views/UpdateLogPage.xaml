@@ -11,8 +11,8 @@
 
         <Image Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Source="{Binding Log.PhotoPath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
 
-        <!-- Upload Image Button -->
-        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="Upload Image" Command="{Binding UploadImageCommand}" CornerRadius="0" Margin="0"/>
+        <!-- Update Image Button -->
+        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="Update Image" Command="{Binding UploadImageCommand}" CornerRadius="0" Margin="0"/>
 
         <!-- Location -->
         <Frame Grid.Row="5"

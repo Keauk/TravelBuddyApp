@@ -93,13 +93,28 @@ namespace TravelBuddyApp.ViewModels
         {
             try
             {
-                var result = await MediaPicker.PickPhotoAsync();
+                string[] options = { "Take Photo", "Choose Photo" };
+
+                string action = await Application.Current.MainPage.DisplayActionSheet("Select Option", "Cancel", null, options);
+
+                FileResult result = null;
+
+                if (action == "Take Photo")
+                {
+                    result = await MediaPicker.CapturePhotoAsync();
+                }
+                else if (action == "Choose Photo")
+                {
+                    result = await MediaPicker.PickPhotoAsync();
+                }
+
                 if (result != null)
                 {
-                    var stream = await result.OpenReadAsync();
-                    var photoUrl = await _apiService.UploadPhotoAsync(stream, result.FileName);
-                    Log.PhotoPath = $"http://10.0.2.2:5086{photoUrl}";
-                    Console.WriteLine($"Photo URL: {Log.PhotoPath}");
+                    using (Stream stream = await result.OpenReadAsync())
+                    {
+                        string photoUrl = await _apiService.UploadPhotoAsync(stream, result.FileName);
+                        Log.PhotoPath = $"http://10.0.2.2:5086{photoUrl}";
+                    }
 
                     OnPropertyChanged(nameof(Log));
                 }

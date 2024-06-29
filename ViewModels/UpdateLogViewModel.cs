@@ -32,9 +32,18 @@ namespace TravelBuddyApp.ViewModels
 
         public UpdateLogViewModel(TripLogResponse tripLog, IApiService apiService, IGeolocationService geolocationService)
         {
+            if (!string.IsNullOrEmpty(tripLog.Location))
+            {
+                string[] coordinates = tripLog.Location.Split(',');
+
+                double latitude = double.Parse(coordinates[0]);
+                double longitude = double.Parse(coordinates[1]);
+
+                SelectedLocation = new Location(latitude, longitude);
+            }
+
             Log = new TripLogInput
             {
-                Location = tripLog.Location,
                 Notes = tripLog.Notes,
                 PhotoPath = tripLog.PhotoPath,
                 Date = DateTime.Today

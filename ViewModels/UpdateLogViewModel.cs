@@ -20,6 +20,17 @@ namespace TravelBuddyApp.ViewModels
             }
         }
 
+        private Location? _selectedLocation;
+        public Location? SelectedLocation
+        {
+            get => _selectedLocation;
+            private set
+            {
+                _selectedLocation = value;
+                OnPropertyChanged(nameof(SelectedLocation));
+            }
+        }
+
         public int TripId { get; private set; }
 
         public ICommand SaveLogCommand { get; }
@@ -62,18 +73,6 @@ namespace TravelBuddyApp.ViewModels
                 SelectedLocation = location;
             });
         }
-
-        private Location? _selectedLocation;
-        public Location? SelectedLocation
-        {
-            get => _selectedLocation;
-            private set
-            {
-                _selectedLocation = value;
-                OnPropertyChanged(nameof(SelectedLocation));
-            }
-        }
-
 
         public async Task OnSaveLog()
         {
